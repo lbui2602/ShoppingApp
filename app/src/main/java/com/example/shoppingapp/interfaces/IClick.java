@@ -4,5 +4,5 @@ import com.example.shoppingapp.models.Product;
 
 public interface IClick {
     void onClick(Product product);
-    void onClickFavorite(String productId);
+    void onClickFavorite(String productId,int pos);
 }

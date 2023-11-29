@@ -81,7 +81,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.imgTim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iClick.onClickFavorite(product.getId());
+                iClick.onClickFavorite(product.getId(),position);
             }
         });
     }

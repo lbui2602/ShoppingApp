@@ -169,7 +169,7 @@ public class TypeFragment extends Fragment implements IClick {
     }
 
     @Override
-    public void onClickFavorite(String productId) {
+    public void onClickFavorite(String productId,int pos) {
         auth=FirebaseAuth.getInstance();
         user= auth.getCurrentUser();
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("favorites");
