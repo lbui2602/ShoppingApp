@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".activities.LoginActivity">
+
+    <TextView
+        android:text="ĐĂNG NHẬP"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textSize="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_50sdp"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="Hãy trở thành thành viên để không bỏ lỡ các ưu đãi,"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_30sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:text="giảm giá và voucher dành riêng cho bạn. "
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="@color/black"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:text="*Email"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edtEmail"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:background="@drawable/shape_button"
+        android:imeOptions="actionNext"
+        android:maxLength="50"
+        android:padding="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+    <TextView
+        android:id="@+id/tvMessEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:text="Email không hợp lệ"
+        android:textColor="#F44336"
+        android:textSize="@dimen/_10sdp" />
+    <TextView
+        android:layout_marginTop="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:text="*Mật khẩu:"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <EditText
+        android:id="@+id/edtPassword"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:maxLength="50"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:imeOptions="actionDone"
+        android:background="@drawable/shape_button"
+        android:padding="@dimen/_5sdp"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:id="@+id/tvMessPassword"
+        android:textSize="@dimen/_10sdp"
+        android:textColor="#F44336"
+        android:visibility="gone"
+        android:text="Mật khẩu không hợp lệ"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:background="@color/black"
+        android:text="Đăng nhập"
+        android:textColor="@color/white"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+    <Button
+        android:id="@+id/btnRegister"
+        android:layout_marginLeft="@dimen/_20sdp"
+        android:layout_marginRight="@dimen/_20sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:text="Đăng ký thành viên"
+        android:background="@color/white"
+        android:textColor="@color/black"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+</LinearLayout>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.shoppingapp.activities.fragments.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.example.shoppingapp.activities.fragments.CartFragment"
+        android:label="fragment_cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.example.shoppingapp.activities.fragments.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" />
+    <fragment
+        android:id="@+id/userFragment"
+        android:name="com.example.shoppingapp.activities.fragments.UserFragment"
+        android:label="fragment_user"
+        tools:layout="@layout/fragment_user" />
+    <fragment
+        android:id="@+id/menuFragment"
+        android:name="com.example.shoppingapp.activities.fragments.MenuFragment"
+        android:label="fragment_menu"
+        tools:layout="@layout/fragment_menu" >
+        <action
+            android:id="@+id/action_menuFragment_to_typeFragment"
+            app:destination="@id/typeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/typeFragment"
+        android:name="com.example.shoppingapp.activities.fragments.TypeFragment"
+        android:label="fragment_type"
+        tools:layout="@layout/fragment_type" >
+        <action
+            android:id="@+id/action_typeFragment_to_detailsFragment"
+            app:destination="@id/detailsFragment" />
+        <action
+            android:id="@+id/action_typeFragment_to_menuFragment"
+            app:destination="@id/menuFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/detailsFragment"
+        android:name="com.example.shoppingapp.activities.fragments.DetailsFragment"
+        android:label="fragment_details"
+        tools:layout="@layout/fragment_details" >
+        <action
+            android:id="@+id/action_detailsFragment_to_typeFragment"
+            app:destination="@id/typeFragment" />
+    </fragment>
+</navigation>
