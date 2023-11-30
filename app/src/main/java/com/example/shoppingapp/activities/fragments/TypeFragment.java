@@ -121,7 +121,7 @@ public class TypeFragment extends Fragment implements IClick {
             }
         });
         if(menuId==7){
-            myRef.addValueEventListener(new ValueEventListener() {
+            myRef.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     for (DataSnapshot productSnapshot : snapshot.getChildren()) {
@@ -189,4 +189,21 @@ public class TypeFragment extends Fragment implements IClick {
             }
         });
     }
+
+    @Override
+    public void onClickDelete(String id, int pos) {
+
+    }
+
+    @Override
+    public void onClickCong(String id, int quantity, int pos) {
+
+    }
+
+    @Override
+    public void onClicktru(String id, int quantity, int pos) {
+
+    }
+
+
 }

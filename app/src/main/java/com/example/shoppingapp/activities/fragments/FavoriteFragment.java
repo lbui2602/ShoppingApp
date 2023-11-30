@@ -127,7 +127,7 @@ public class FavoriteFragment extends Fragment implements IClick {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
                     String productId=productSnapshot.getValue(String.class);
-                    FirebaseDatabase.getInstance().getReference("products").child(productId).addValueEventListener(new ValueEventListener() {
+                    FirebaseDatabase.getInstance().getReference("products").child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             Product product=snapshot.getValue(Product.class);
@@ -155,7 +155,7 @@ public class FavoriteFragment extends Fragment implements IClick {
         bundle.putString("product_id", product.getId());
         bundle.putInt("back",122);
         bundle.putInt("menu_id",product.getType());
-        navController.navigate(R.id.action_typeFragment_to_detailsFragment,bundle);
+        navController.navigate(R.id.action_favoriteFragment_to_detailsFragment,bundle);
     }
 
     @Override
@@ -163,7 +163,7 @@ public class FavoriteFragment extends Fragment implements IClick {
         list.remove(pos);
         Toast.makeText(getContext(), ""+list.size(), Toast.LENGTH_SHORT).show();
         productAdapter.notifyDataSetChanged();
-        myRef.child(user.getUid()).child("favorites").child(productId).addValueEventListener(new ValueEventListener() {
+        myRef.child(user.getUid()).child("favorites").child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 snapshot.getRef().setValue(null);
@@ -174,4 +174,21 @@ public class FavoriteFragment extends Fragment implements IClick {
             }
         });
     }
+
+    @Override
+    public void onClickDelete(String id, int pos) {
+
+    }
+
+    @Override
+    public void onClickCong(String id, int quantity, int pos) {
+
+    }
+
+    @Override
+    public void onClicktru(String id, int quantity, int pos) {
+
+    }
+
+
 }

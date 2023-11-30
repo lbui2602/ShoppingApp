@@ -176,7 +176,13 @@ public class DetailsFragment extends Fragment {
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
                 bundle.putInt("menu_id",back);
-                navController.navigate(R.id.action_detailsFragment_to_typeFragment,bundle);
+                if(back==122){
+                    navController.navigate(R.id.action_detailsFragment_to_favoriteFragment);
+                }else if (back==121){
+                    navController.navigate(R.id.action_detailsFragment_to_cartFragment);
+                }else{
+                    navController.navigate(R.id.action_detailsFragment_to_typeFragment,bundle);
+                }
             }
         });
         myRef.child(productId).addValueEventListener(new ValueEventListener() {
