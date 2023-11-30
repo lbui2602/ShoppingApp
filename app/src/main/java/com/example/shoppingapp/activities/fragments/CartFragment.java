@@ -137,7 +137,6 @@ public class CartFragment extends Fragment implements IClick {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            Log.d("TAG", "onCancelled1: "+error.getMessage());
                         }
                     });
 
@@ -180,6 +179,7 @@ public class CartFragment extends Fragment implements IClick {
                 list.remove(pos);
                 cartAdapter.notifyItemRemoved(pos);
                 sum=sum-(price*quantity);
+
             }
 
             @Override
