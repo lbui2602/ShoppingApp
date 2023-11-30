@@ -3,12 +3,226 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#E8E7E7"
     tools:context=".activities.fragments.PayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
+        android:orientation="vertical"
+        android:weightSum="15"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="match_parent">
+        <ImageView
+            android:layout_weight="0.7"
+            android:src="@drawable/back_icon"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="0dp"/>
+        <TextView
+            android:text="ĐƠN HÀNG CỦA BẠN"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textStyle="bold"
+            android:textSize="@dimen/_17sdp"
+            android:layout_weight="0.6"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"/>
+        <ScrollView
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="12.5">
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <LinearLayout
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@color/white"
+                    android:layout_width="match_parent"
+                    android:weightSum="10"
+                    android:orientation="horizontal"
+                    android:layout_height="@dimen/_170sdp">
+                    <LinearLayout
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_width="0dp"
+                        android:orientation="vertical"
+                        android:layout_weight="3.5"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:text="Email:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <TextView
+                            android:text="Mã đơn hàng:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <TextView
+                            android:text="Giá trị đơn hàng:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <TextView
+                            android:text="Phí vận chuyển:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <TextView
+                            android:text="Tổng giá trị:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="@color/black"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                    </LinearLayout>
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:layout_width="0dp"
+                        android:layout_weight="6.5"
+                        android:layout_height="match_parent">
+                        <TextView
+                            android:id="@+id/tvEmailPay"
+                            android:text="Email:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <TextView
+                            android:id="@+id/tvMaDonHangPay"
+                            android:text="Mã đơn hàng:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <TextView
+                            android:id="@+id/tvGiaTriDonPay"
+                            android:text="Giá trị đơn hàng:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <TextView
+                            android:text="đ30.000"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <TextView
+                            android:id="@+id/tvSum"
+                            android:text="Tổng giá trị:"
+                            android:textSize="@dimen/_12sdp"
+                            android:textColor="#FF0000"
+                            android:textStyle="bold"
+                            android:gravity="center"
+                            android:layout_width="wrap_content"
+                            android:layout_height="@dimen/_30sdp"/>
+                    </LinearLayout>
+                </LinearLayout>
+                <TextView
+                    android:text="Địa chỉ"
+                    android:layout_marginLeft="@dimen/_10sdp"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_15sdp"
+                    android:textColor="@color/black"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"/>
+                <EditText
+                    android:id="@+id/edtTP"
+                    android:hint="Tỉnh/Thành phố:"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/shape_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"/>
+                <EditText
+                    android:id="@+id/edtHuyen"
+                    android:hint="Quận/huyện:"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/shape_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"/>
+                <EditText
+                    android:id="@+id/edtXa"
+                    android:hint="Xã/phường:"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/shape_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"/>
+                <EditText
+                    android:id="@+id/edtSoNha"
+                    android:hint="Địa chỉ cụ thể:"
+                    android:layout_margin="@dimen/_10sdp"
+                    android:background="@drawable/shape_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    android:layout_height="@dimen/_100sdp">
+                    <TextView
+                        android:text="Phương thức thanh toán"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:textStyle="bold"
+                        android:textSize="@dimen/_15sdp"
+                        android:textColor="@color/black"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"/>
+                    <RadioGroup
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <RadioButton
+                            android:id="@+id/radioNhanHang"
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:text="Thanh toán khi nhận hàng"
+                            android:buttonTint="@color/radio_button_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"/>
+                        <RadioButton
+                            android:id="@+id/radioChuyenKhoan"
+                            android:textSize="@dimen/_10sdp"
+                            android:textColor="@color/black"
+                            android:text="Chuyển khoản qua tài khoản ngân hàng"
+                            android:buttonTint="@color/radio_button_color"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"/>
+                    </RadioGroup>
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+        <Button
+            android:id="@+id/btnConfirmPay"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:background="@color/black"
+            android:text="Xác nhận thanh toán"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_12sdp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
 
 </FrameLayout>

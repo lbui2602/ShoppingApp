@@ -108,7 +108,10 @@ public class CartFragment extends Fragment implements IClick {
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(getContext(), ""+sum, Toast.LENGTH_SHORT).show();
+                NavController navController=NavHostFragment.findNavController(CartFragment.this);
+                Bundle bundle=new Bundle();
+                bundle.putInt("sum",sum);
+                navController.navigate(R.id.action_cartFragment_to_payFragment);
             }
         });
     }
@@ -137,7 +140,6 @@ public class CartFragment extends Fragment implements IClick {
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
-                            Log.d("TAG", "onCancelled1: "+error.getMessage());
                         }
                     });
 
@@ -180,6 +182,7 @@ public class CartFragment extends Fragment implements IClick {
                 list.remove(pos);
                 cartAdapter.notifyItemRemoved(pos);
                 sum=sum-(price*quantity);
+
             }
 
             @Override

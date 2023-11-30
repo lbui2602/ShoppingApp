@@ -9,15 +9,20 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.models.Product;
+import com.example.shoppingapp.models.User;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -40,6 +45,7 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
+    static User user1;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -86,29 +92,9 @@ public class HomeFragment extends Fragment {
     }
 
     private void initView() {
-        firebaseDatabase=FirebaseDatabase.getInstance();
-        myRef=firebaseDatabase.getReference("users/favorites");
-        FirebaseAuth auth=FirebaseAuth.getInstance();
-        FirebaseUser user= auth.getCurrentUser();
-        List<String> favoriteList = new ArrayList<>();
-        favoriteList.add("1");
-        favoriteList.add("2");
-        favoriteList.add("3");
 
-        DatabaseReference userRef = FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid());
 
-//        userRef.child("favorites").setValue(favoriteList)
-//                .addOnSuccessListener(new OnSuccessListener<Void>() {
-//                    @Override
-//                    public void onSuccess(Void aVoid) {
-//                        // Thêm favorites thành công
-//                    }
-//                })
-//                .addOnFailureListener(new OnFailureListener() {
-//                    @Override
-//                    public void onFailure(@NonNull Exception e) {
-//                        // Xử lý khi có lỗi xảy ra trong quá trình thêm favorites
-//                    }
-//                });
     }
+
+
 }
