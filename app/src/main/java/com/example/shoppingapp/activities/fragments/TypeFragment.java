@@ -22,7 +22,6 @@ import com.example.shoppingapp.R;
 import com.example.shoppingapp.adapters.ProductAdapter;
 import com.example.shoppingapp.interfaces.IClick;
 import com.example.shoppingapp.models.Product;
-import com.example.shoppingapp.repositories.ProductRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -45,7 +44,6 @@ public class TypeFragment extends Fragment implements IClick {
     RecyclerView rcv;
     List<Product> list;
     ProductAdapter productAdapter;
-    ProductRepository productRepository;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
     FirebaseAuth auth;
@@ -191,17 +189,17 @@ public class TypeFragment extends Fragment implements IClick {
     }
 
     @Override
-    public void onClickDelete(String id, int pos) {
+    public void onClickDelete(String id, int price, int quantity, int pos) {
 
     }
 
     @Override
-    public void onClickCong(String id, int quantity, int pos) {
+    public void onClickCong(String id, int price, int pos) {
 
     }
 
     @Override
-    public void onClicktru(String id, int quantity, int pos) {
+    public void onClicktru(String id, int price, int pos) {
 
     }
 

@@ -21,7 +21,6 @@ import com.example.shoppingapp.R;
 import com.example.shoppingapp.adapters.ProductAdapter;
 import com.example.shoppingapp.interfaces.IClick;
 import com.example.shoppingapp.models.Product;
-import com.example.shoppingapp.repositories.ProductRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -52,12 +51,10 @@ public class FavoriteFragment extends Fragment implements IClick {
     RecyclerView rcv;
     List<Product> list;
     ProductAdapter productAdapter;
-    ProductRepository productRepository;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
     FirebaseAuth auth;
     FirebaseUser user;
-    ImageView imgBackType;
     NavController navController;
 
     public FavoriteFragment() {
@@ -103,7 +100,6 @@ public class FavoriteFragment extends Fragment implements IClick {
         super.onViewCreated(view, savedInstanceState);
         rcv=view.findViewById(R.id.rcvFavorite);
         navController = NavHostFragment.findNavController(FavoriteFragment.this);
-        imgBackType=view.findViewById(R.id.imgBackType);
         GridLayoutManager gridLayoutManager=new GridLayoutManager(getContext(),2);
         rcv.setLayoutManager(gridLayoutManager);
         auth=FirebaseAuth.getInstance();
@@ -113,12 +109,6 @@ public class FavoriteFragment extends Fragment implements IClick {
         list=new ArrayList<>();
         productAdapter=new ProductAdapter(list,getContext(),FavoriteFragment.this);
         rcv.setAdapter(productAdapter);
-//        imgBackType.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                navController.navigate(R.id.action_typeFragment_to_menuFragment);
-//            }
-//        });
         loadData();
     }
     private void loadData() {
@@ -161,7 +151,6 @@ public class FavoriteFragment extends Fragment implements IClick {
     @Override
     public void onClickFavorite(String productId,int pos) {
         list.remove(pos);
-        Toast.makeText(getContext(), ""+list.size(), Toast.LENGTH_SHORT).show();
         productAdapter.notifyDataSetChanged();
         myRef.child(user.getUid()).child("favorites").child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -176,17 +165,17 @@ public class FavoriteFragment extends Fragment implements IClick {
     }
 
     @Override
-    public void onClickDelete(String id, int pos) {
+    public void onClickDelete(String id, int price, int quantity, int pos) {
 
     }
 
     @Override
-    public void onClickCong(String id, int quantity, int pos) {
+    public void onClickCong(String id, int price, int pos) {
 
     }
 
     @Override
-    public void onClicktru(String id, int quantity, int pos) {
+    public void onClicktru(String id, int price, int pos) {
 
     }
 

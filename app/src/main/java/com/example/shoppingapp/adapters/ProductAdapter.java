@@ -17,7 +17,6 @@ import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.interfaces.IClick;
 import com.example.shoppingapp.models.Product;
-import com.example.shoppingapp.repositories.ProductRepository;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -57,7 +56,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         FirebaseUser user= auth.getCurrentUser();
         Glide.with(context).load(product.getListImage().get(0)).into(holder.imgAnh);
         holder.tvName.setText(product.getName());
-        holder.tvPrice.setText(product.getPrice());
+        holder.tvPrice.setText("đ"+product.getPrice()+".000");
         DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("favorites");
         databaseReference.orderByValue().equalTo(product.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
