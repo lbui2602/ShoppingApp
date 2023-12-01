@@ -69,6 +69,7 @@ public class DetailsFragment extends Fragment {
     FirebaseAuth auth;
     FirebaseUser user;
     String size;
+    static Cart cart;
 
     public DetailsFragment() {
         // Required empty public constructor
@@ -158,11 +159,22 @@ public class DetailsFragment extends Fragment {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if(snapshot.exists()){
-                            myRef2.child(user.getUid()).child("favorites").child(productId).setValue(null);
+                            myRef2.child(user.getUid()).child("favorites").child(productId).removeValue();
                             imgFavoriteDetails.setImageResource(R.drawable.favorite_icon);
                         }else{
-                            myRef2.child(user.getUid()).child("favorites").child(productId).setValue(productId);
-                            imgFavoriteDetails.setImageResource(R.drawable.baseline_favorite_24);
+                            FirebaseDatabase.getInstance().getReference("products").child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    Product product=snapshot.getValue(Product.class);
+                                    myRef2.child(user.getUid()).child("favorites").child(productId).setValue(product);
+                                    imgFavoriteDetails.setImageResource(R.drawable.baseline_favorite_24);
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
                         }
                     }
                     @Override
@@ -185,7 +197,7 @@ public class DetailsFragment extends Fragment {
                 }
             }
         });
-        myRef.child(productId).addValueEventListener(new ValueEventListener() {
+        myRef.child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Product product=snapshot.getValue(Product.class);
@@ -194,7 +206,7 @@ public class DetailsFragment extends Fragment {
                 }
                 imageSlider.setImageList(list);
                 tvName.setText(product.getName().toString());
-                tvPrice.setText(product.getPrice().toString());
+                tvPrice.setText("đ"+product.getPrice().toString()+".000");
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -244,15 +256,25 @@ public class DetailsFragment extends Fragment {
                     myRef2.child(user.getUid()).child("carts").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Cart cart;
                             if(snapshot.exists()){
                                 cart = snapshot.getValue(Cart.class);
                                 cart.setQuantity(cart.getQuantity()+1);
                                 myRef2.child(user.getUid()).child("carts").child(id).setValue(cart);
                             }
                             else{
-                                cart = new Cart(id,productId,1,size);
-                                myRef2.child(user.getUid()).child("carts").child(id).setValue(cart);
+                                FirebaseDatabase.getInstance().getReference("products").child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        Product product=snapshot.getValue(Product.class);
+                                        cart = new Cart(id,product,size,1);
+                                        myRef2.child(user.getUid()).child("carts").child(id).setValue(cart);
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                             Toast.makeText(getContext(), "Thêm vào giỏ hàng thành công", Toast.LENGTH_SHORT).show();
                         }

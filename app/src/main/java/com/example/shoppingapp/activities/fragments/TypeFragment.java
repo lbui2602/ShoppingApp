@@ -167,20 +167,19 @@ public class TypeFragment extends Fragment implements IClick {
     }
 
     @Override
-    public void onClickFavorite(String productId,int pos) {
+    public void onClickFavorite(Product product,int pos) {
         auth=FirebaseAuth.getInstance();
         user= auth.getCurrentUser();
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("favorites");
-        databaseReference.child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("favorites").child(product.getId());
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 if(snapshot.exists()){
                     snapshot.getRef().setValue(null);
-                    productAdapter.notifyDataSetChanged();
                 }else{
-                    databaseReference.child(productId).setValue(productId);
-                    productAdapter.notifyDataSetChanged();
+                    databaseReference.setValue(product);
                 }
+                productAdapter.notifyItemChanged(pos);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

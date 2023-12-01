@@ -14,16 +14,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.interfaces.IClick;
-import com.example.shoppingapp.models.CartCTO;
+import com.example.shoppingapp.models.Cart;
 
 import java.util.List;
 
 public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder> {
     Context context;
-    List<CartCTO> list;
+    List<Cart> list;
     IClick iClick;
 
-    public CartAdapter(Context context, List<CartCTO> list,IClick iClick) {
+    public CartAdapter(Context context, List<Cart> list, IClick iClick) {
         this.context = context;
         this.list = list;
         this.iClick=iClick;
@@ -38,24 +38,24 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull CartViewHolder holder, @SuppressLint("RecyclerView") int position) {
-        CartCTO cartCTO=list.get(position);
-        holder.tvNameCart.setText(cartCTO.getName());
-        holder.tvKichThuocCart.setText(cartCTO.getSize());
-        holder.tvPriceCart.setText("đ"+cartCTO.getPrice()+".000");
-        holder.tvSoLuongCart.setText(String.valueOf(cartCTO.getQuantity()));
-        holder.tvProductIdCart.setText(cartCTO.getProductId());
-        Glide.with(context).load(cartCTO.getImage()).into(holder.imgAnhCart);
+        Cart cart=list.get(position);
+        holder.tvNameCart.setText(cart.getProduct().getName());
+        holder.tvKichThuocCart.setText(cart.getSize());
+        holder.tvPriceCart.setText("đ"+cart.getProduct().getPrice()+".000");
+        holder.tvSoLuongCart.setText(String.valueOf(cart.getQuantity()));
+        holder.tvProductIdCart.setText(cart.getProduct().getId());
+        Glide.with(context).load(cart.getProduct().getListImage().get(0)).into(holder.imgAnhCart);
         holder.imgDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iClick.onClickDelete(cartCTO.getId(),Integer.parseInt(cartCTO.getPrice()), cartCTO.getQuantity(), position);
+                iClick.onClickDelete(cart.getId(),Integer.parseInt(cart.getProduct().getPrice()), cart.getQuantity(), position);
             }
         });
         holder.imgCong.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 holder.tvSoLuongCart.setText(String.valueOf(Integer.parseInt(holder.tvSoLuongCart.getText().toString())+1));
-                iClick.onClickCong(cartCTO.getId(),Integer.parseInt(cartCTO.getPrice()),position);
+                iClick.onClickCong(cart.getId(),Integer.parseInt(cart.getProduct().getPrice()),position);
             }
         });
         holder.imgTru.setOnClickListener(new View.OnClickListener() {
@@ -64,11 +64,11 @@ public class CartAdapter extends RecyclerView.Adapter<CartAdapter.CartViewHolder
                 if(Integer.parseInt(holder.tvSoLuongCart.getText().toString())==1){
                     list.remove(position);
                     notifyDataSetChanged();
-                    iClick.onClicktru(cartCTO.getId(),Integer.parseInt(cartCTO.getPrice()),position);
+                    iClick.onClicktru(cart.getId(),Integer.parseInt(cart.getProduct().getPrice()),position);
                 }
                 else{
                     holder.tvSoLuongCart.setText(String.valueOf(Integer.parseInt(holder.tvSoLuongCart.getText().toString())-1));
-                    iClick.onClicktru(cartCTO.getId(),Integer.parseInt(cartCTO.getPrice()),position);
+                    iClick.onClicktru(cart.getId(),Integer.parseInt(cart.getProduct().getPrice()),position);
                 }
             }
         });

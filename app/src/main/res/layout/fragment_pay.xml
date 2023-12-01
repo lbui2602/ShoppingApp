@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <ImageView
+            android:id="@+id/imgBackPay"
             android:layout_weight="0.7"
             android:src="@drawable/back_icon"
             android:layout_width="@dimen/_30sdp"
@@ -40,7 +41,7 @@
                     android:layout_width="match_parent"
                     android:weightSum="10"
                     android:orientation="horizontal"
-                    android:layout_height="@dimen/_170sdp">
+                    android:layout_height="@dimen/_140sdp">
                     <LinearLayout
                         android:layout_marginLeft="@dimen/_5sdp"
                         android:layout_width="0dp"
@@ -49,14 +50,6 @@
                         android:layout_height="match_parent">
                         <TextView
                             android:text="Email:"
-                            android:textSize="@dimen/_12sdp"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_30sdp"/>
-                        <TextView
-                            android:text="Mã đơn hàng:"
                             android:textSize="@dimen/_12sdp"
                             android:textColor="@color/black"
                             android:textStyle="bold"
@@ -103,15 +96,6 @@
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/_30sdp"/>
                         <TextView
-                            android:id="@+id/tvMaDonHangPay"
-                            android:text="Mã đơn hàng:"
-                            android:textSize="@dimen/_12sdp"
-                            android:textColor="#FF0000"
-                            android:textStyle="bold"
-                            android:gravity="center"
-                            android:layout_width="wrap_content"
-                            android:layout_height="@dimen/_30sdp"/>
-                        <TextView
                             android:id="@+id/tvGiaTriDonPay"
                             android:text="Giá trị đơn hàng:"
                             android:textSize="@dimen/_12sdp"
@@ -121,6 +105,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="@dimen/_30sdp"/>
                         <TextView
+                            android:id="@+id/tvShipPay"
                             android:text="đ30.000"
                             android:textSize="@dimen/_12sdp"
                             android:textColor="#FF0000"

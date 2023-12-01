@@ -16,15 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.adapters.CartAdapter;
 import com.example.shoppingapp.interfaces.IClick;
 import com.example.shoppingapp.models.Cart;
-import com.example.shoppingapp.models.CartCTO;
 import com.example.shoppingapp.models.Product;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -43,7 +39,7 @@ import java.util.List;
  * create an instance of this fragment.
  */
 public class CartFragment extends Fragment implements IClick {
-    List<CartCTO> list;
+    List<Cart> list;
     Context context;
     CartAdapter cartAdapter;
     RecyclerView rcv;
@@ -53,6 +49,7 @@ public class CartFragment extends Fragment implements IClick {
     FirebaseUser user;
     Button btnThanhToan;
     static int sum;
+    String email;
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -111,7 +108,8 @@ public class CartFragment extends Fragment implements IClick {
                 NavController navController=NavHostFragment.findNavController(CartFragment.this);
                 Bundle bundle=new Bundle();
                 bundle.putInt("sum",sum);
-                navController.navigate(R.id.action_cartFragment_to_payFragment);
+                bundle.putString("email",email);
+                navController.navigate(R.id.action_cartFragment_to_payFragment,bundle);
             }
         });
     }
@@ -119,6 +117,7 @@ public class CartFragment extends Fragment implements IClick {
     private void loadData() {
         auth=FirebaseAuth.getInstance();
         user= auth.getCurrentUser();
+        email=user.getEmail();
         firebaseDatabase=FirebaseDatabase.getInstance();
         dbUser=firebaseDatabase.getReference("users");
         dbProduct=firebaseDatabase.getReference("products");
@@ -128,23 +127,10 @@ public class CartFragment extends Fragment implements IClick {
                 sum=0;
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
                     Cart cart=productSnapshot.getValue(Cart.class);
-                    FirebaseDatabase.getInstance().getReference("products").child(cart.getProductId()).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Product product=snapshot.getValue(Product.class);
-                            CartCTO cartCTO=new CartCTO(product.getName(),product.getPrice(),product.getId(),cart.getId(), cart.getSize(), cart.getQuantity(),product.getListImage().get(0));
-                            list.add(cartCTO);
-                            sum=sum+Integer.parseInt(cartCTO.getPrice())*cart.getQuantity();
-                            cartAdapter.notifyDataSetChanged();
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-                        }
-                    });
-
+                    list.add(cart);
+                    cartAdapter.notifyDataSetChanged();
+                    sum+=Integer.parseInt(cart.getProduct().getPrice())*cart.getQuantity();
                 }
-
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
@@ -152,7 +138,6 @@ public class CartFragment extends Fragment implements IClick {
             }
         });
     }
-
     private void initView(View view) {
         btnThanhToan=view.findViewById(R.id.btnThanhToan);
         rcv=view.findViewById(R.id.rcvCart);
@@ -162,34 +147,22 @@ public class CartFragment extends Fragment implements IClick {
         cartAdapter=new CartAdapter(getContext(),list,CartFragment.this);
         rcv.setAdapter(cartAdapter);
     }
-
     @Override
     public void onClick(Product product) {
 
     }
 
     @Override
-    public void onClickFavorite(String productId, int pos) {
+    public void onClickFavorite(Product product, int pos) {
 
     }
 
     @Override
     public void onClickDelete(String id,int price,int quantity,int pos) {
-        dbUser.child(user.getUid()).child("carts").child(id).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                snapshot.getRef().setValue(null);
-                list.remove(pos);
-                cartAdapter.notifyItemRemoved(pos);
-                sum=sum-(price*quantity);
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        dbUser.child(user.getUid()).child("carts").child(id).removeValue();
+        list.remove(pos);
+        cartAdapter.notifyDataSetChanged();
+        sum=sum-(price*quantity);
     }
 
     @Override

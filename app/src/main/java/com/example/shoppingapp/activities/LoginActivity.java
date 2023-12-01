@@ -58,26 +58,40 @@ public class LoginActivity extends AppCompatActivity {
         btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                progressDialog.show();
-                String email=edtEmail.getText().toString().trim();
-                String password=edtPassword.getText().toString().trim();
-                FirebaseAuth auth=FirebaseAuth.getInstance();
-                auth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                progressDialog.dismiss();
-                                if (task.isSuccessful()) {
-                                    Intent intent=new Intent(LoginActivity.this,MainActivity.class);
-                                    startActivity(intent);
-                                    finishAffinity();
-                                } else {
-                                    // Nếu đăng nhập thất bại, hiển thị thông báo cho người dùng.
-                                    Log.w("LoginActivity", "Đăng nhập thất bại", task.getException());
-                                    Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Vui lòng kiểm tra thông tin đăng nhập của bạn.", Toast.LENGTH_SHORT).show();
+                if(edtEmail.getText().toString().trim().length()==0){
+                    tvMessEmail.setVisibility(View.VISIBLE);
+                }else{
+                    tvMessEmail.setVisibility(View.GONE);
+                }
+
+                if(edtPassword.getText().toString().trim().length()==0){
+                    tvMessPassword.setVisibility(View.VISIBLE);
+                }
+                else{
+                    tvMessPassword.setVisibility(View.GONE);
+                }
+                if(edtEmail.getText().toString().trim().length()>0 && edtPassword.getText().toString().trim().length()>0){
+                    tvMessEmail.setVisibility(View.GONE);
+                    tvMessPassword.setVisibility(View.GONE);
+                    progressDialog.show();
+                    String email=edtEmail.getText().toString().trim();
+                    String password=edtPassword.getText().toString().trim();
+                    FirebaseAuth auth=FirebaseAuth.getInstance();
+                    auth.signInWithEmailAndPassword(email, password)
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    progressDialog.dismiss();
+                                    if (task.isSuccessful()) {
+                                        Intent intent=new Intent(LoginActivity.this,MainActivity.class);
+                                        startActivity(intent);
+                                        finishAffinity();
+                                    } else {
+                                        Toast.makeText(LoginActivity.this, "Đăng nhập thất bại. Vui lòng kiểm tra lại thông tin đăng nhập.", Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                }
             }
         });
         btnRegister.setOnClickListener(new View.OnClickListener() {

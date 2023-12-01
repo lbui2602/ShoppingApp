@@ -5,10 +5,13 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.shoppingapp.R;
@@ -28,11 +31,6 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class HomeFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
@@ -45,7 +43,7 @@ public class HomeFragment extends Fragment {
     private String mParam2;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
-    static User user1;
+    SearchView searchView;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -88,12 +86,25 @@ public class HomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        initView();
+        initView(view);
     }
 
-    private void initView() {
-
-
+    private void initView(View view) {
+        searchView=view.findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                NavController navController= NavHostFragment.findNavController(HomeFragment.this);
+                Bundle bundle=new Bundle();
+                bundle.putString("key",s);
+                navController.navigate(R.id.action_homeFragment_to_searchFragment,bundle);
+                return false;
+            }
+            @Override
+            public boolean onQueryTextChange(String s) {
+                return false;
+            }
+        });
     }
 
 

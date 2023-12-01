@@ -57,8 +57,8 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         Glide.with(context).load(product.getListImage().get(0)).into(holder.imgAnh);
         holder.tvName.setText(product.getName());
         holder.tvPrice.setText("đ"+product.getPrice()+".000");
-        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("favorites");
-        databaseReference.orderByValue().equalTo(product.getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+        DatabaseReference databaseReference= FirebaseDatabase.getInstance().getReference().child("users").child(user.getUid()).child("favorites").child(product.getId());
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
@@ -81,7 +81,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ProductV
         holder.imgTim.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                iClick.onClickFavorite(product.getId(),position);
+                iClick.onClickFavorite(product,position);
             }
         });
     }

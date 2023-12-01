@@ -116,25 +116,13 @@ public class FavoriteFragment extends Fragment implements IClick {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for (DataSnapshot productSnapshot : snapshot.getChildren()) {
-                    String productId=productSnapshot.getValue(String.class);
-                    FirebaseDatabase.getInstance().getReference("products").child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            Product product=snapshot.getValue(Product.class);
-                            list.add(product);
-                            productAdapter.notifyDataSetChanged();
-                        }
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
+                    Product product=productSnapshot.getValue(Product.class);
+                    list.add(product);
+                    productAdapter.notifyDataSetChanged();
                 }
             }
-
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
             }
         });
     }
@@ -149,35 +137,21 @@ public class FavoriteFragment extends Fragment implements IClick {
     }
 
     @Override
-    public void onClickFavorite(String productId,int pos) {
+    public void onClickFavorite(Product product,int pos) {
         list.remove(pos);
         productAdapter.notifyDataSetChanged();
-        myRef.child(user.getUid()).child("favorites").child(productId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                snapshot.getRef().setValue(null);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
+        myRef.child(user.getUid()).child("favorites").child(product.getId()).removeValue();
     }
-
     @Override
     public void onClickDelete(String id, int price, int quantity, int pos) {
 
     }
-
     @Override
     public void onClickCong(String id, int price, int pos) {
 
     }
-
     @Override
     public void onClicktru(String id, int price, int pos) {
 
     }
-
-
 }

@@ -4,15 +4,11 @@ import java.util.List;
 
 public class Cart {
     private String id;
-    private String productId;
-    private int quantity;
+    private Product product;
     private String size;
+    private int quantity;
 
-    public Cart(String id, String productId, int quantity, String size) {
-        this.id = id;
-        this.productId = productId;
-        this.quantity = quantity;
-        this.size = size;
+    public Cart() {
     }
 
     public String getId() {
@@ -23,20 +19,12 @@ public class Cart {
         this.id = id;
     }
 
-    public String getProductId() {
-        return productId;
+    public Product getProduct() {
+        return product;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setProduct(Product product) {
+        this.product = product;
     }
 
     public String getSize() {
@@ -47,8 +35,18 @@ public class Cart {
         this.size = size;
     }
 
-    public Cart() {
+    public int getQuantity() {
+        return quantity;
     }
 
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
 
+    public Cart(String id, Product product, String size, int quantity) {
+        this.id = id;
+        this.product = product;
+        this.size = size;
+        this.quantity = quantity;
+    }
 }
