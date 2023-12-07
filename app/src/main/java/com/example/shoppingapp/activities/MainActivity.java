@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity implements UserFragment.onCl
 
     @Override
     public void onLogout() {
+        Log.d("TAG", "onLogout: ");
         finish();
     }
 }

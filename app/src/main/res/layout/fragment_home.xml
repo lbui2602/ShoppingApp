@@ -19,88 +19,105 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.7"/>
-
         <ScrollView
             android:layout_weight="9.3"
             android:layout_width="match_parent"
             android:layout_height="0dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:orientation="vertical"
                 android:layout_height="match_parent">
-
                 <ImageView
-                    android:src="@drawable/ic_launcher_background"
+                    android:src="@drawable/a"
                     android:id="@+id/img1"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_300sdp" />
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_30sdp" />
-
                 <ImageView
-                    android:src="@drawable/ic_launcher_background"
+                    android:src="@drawable/b"
                     android:id="@+id/img2"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/_300sdp" />
-
                 <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/_30sdp" />
-
-                <TextView
-                    android:text="San pham noi bat"
-                    android:textColor="@color/black"
-                    android:textStyle="bold"
-                    android:textSize="@dimen/_20sdp"
-                    android:layout_marginLeft="@dimen/_20sdp"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <LinearLayout
+                    android:layout_marginTop="@dimen/_20sdp"
                     android:layout_marginLeft="@dimen/_15sdp"
                     android:layout_marginRight="@dimen/_15sdp"
                     android:orientation="horizontal"
                     android:weightSum="4"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
-                    <Button
-                        android:text="Nam"
-                        android:background="@drawable/shape_button_2"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:layout_height="wrap_content"/>
-                    <Button
-                        android:text="Nu"
-                        android:background="@drawable/shape_button_2"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:layout_height="wrap_content"/>
-                    <Button
-                        android:text="Tre em"
-                        android:background="@drawable/shape_button_2"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:layout_height="wrap_content"/>
-                    <Button
-                        android:text="Sport"
-                        android:background="@drawable/shape_button_2"
-                        android:layout_weight="1"
-                        android:layout_width="0dp"
-                        android:layout_margin="@dimen/_7sdp"
-                        android:layout_height="wrap_content"/>
+                    <HorizontalScrollView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent">
+                            <Button
+                                android:id="@+id/btnAo"
+                                android:text="Áo"
+                                android:background="@drawable/shape_button_2"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_margin="@dimen/_7sdp"
+                                android:layout_height="wrap_content"/>
+                            <Button
+                                android:id="@+id/btnQuan"
+                                android:text="Quần"
+                                android:background="@drawable/shape_button_2"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_margin="@dimen/_7sdp"
+                                android:layout_height="wrap_content"/>
+                            <Button
+                                android:id="@+id/btnGiay"
+                                android:text="Giày"
+                                android:background="@drawable/shape_button_2"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_margin="@dimen/_7sdp"
+                                android:layout_height="wrap_content"/>
+                            <Button
+                                android:id="@+id/btnPhuKien"
+                                android:text="Phụ kiện"
+                                android:background="@drawable/shape_button_2"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_margin="@dimen/_7sdp"
+                                android:layout_height="wrap_content"/>
+                            <Button
+                                android:id="@+id/btnSport"
+                                android:text="Sport"
+                                android:background="@drawable/shape_button_2"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_margin="@dimen/_7sdp"
+                                android:layout_height="wrap_content"/>
+                            <Button
+                                android:id="@+id/btnDoLot"
+                                android:text="Đồ lót"
+                                android:background="@drawable/shape_button_2"
+                                android:layout_weight="1"
+                                android:layout_width="0dp"
+                                android:layout_margin="@dimen/_7sdp"
+                                android:layout_height="wrap_content"/>
+                        </LinearLayout>
+                    </HorizontalScrollView>
                 </LinearLayout>
+                <TextView
+                    android:text="SẢN PHẨM NỔI BẬT"
+                    android:textColor="@color/black"
+                    android:textStyle="bold"
+                    android:textSize="@dimen/_20sdp"
+                    android:layout_marginLeft="@dimen/_20sdp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
                 <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rcvHome"
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/_200sdp" />
-
+                    android:layout_height="@dimen/_300sdp" />
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
 </FrameLayout>

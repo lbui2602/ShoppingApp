@@ -187,12 +187,25 @@ public class DetailsFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 Bundle bundle=new Bundle();
-                bundle.putInt("menu_id",back);
+                bundle.putInt("menu_id",menuId);
                 if(back==122){
                     navController.navigate(R.id.action_detailsFragment_to_favoriteFragment);
                 }else if (back==121){
                     navController.navigate(R.id.action_detailsFragment_to_cartFragment);
+                }else if(back==200){
+                    String key=getArguments().getString("key");
+                    bundle.putString("key",key);
+                    navController.navigate(R.id.action_detailsFragment_to_searchFragment,bundle);
+                }else if(back==100){
+                    String key=getArguments().getString("key");
+                    bundle.putString("key",key);
+                    navController.navigate(R.id.action_detailsFragment_to_homeFragment);
+                }
+                else if(back==1000) {
+                    bundle.putInt("back",100);
+                    navController.navigate(R.id.action_detailsFragment_to_typeFragment,bundle);
                 }else{
+                    bundle.putInt("back",300);
                     navController.navigate(R.id.action_detailsFragment_to_typeFragment,bundle);
                 }
             }

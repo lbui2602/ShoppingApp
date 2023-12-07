@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/llItemProductHome"
+    android:layout_margin="@dimen/_5sdp"
+    android:layout_width="@dimen/_150sdp"
+    android:orientation="vertical"
+    android:layout_height="@dimen/_270sdp">
+    <ImageView
+        android:id="@+id/imgAnhHome"
+        android:src="@drawable/ic_launcher_background"
+        android:layout_width="match_parent"
+        android:layout_margin="@dimen/_5sdp"
+        android:layout_height="@dimen/_200sdp"/>
+    <TextView
+        android:id="@+id/tvNameHome"
+        android:text="Ao so mi de la regulagggggr"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13sdp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:layout_height="wrap_content"/>
+    <TextView
+        android:layout_marginLeft="@dimen/_5sdp"
+        android:id="@+id/tvPriceHome"
+        android:text="99000"
+        android:textColor="@color/black"
+        android:textSize="@dimen/_13sdp"
+        android:layout_weight="8"
+        android:layout_width="match_parent"
+        android:gravity="center_vertical"
+        android:layout_height="@dimen/_30sdp"/>
+
+
+</LinearLayout>

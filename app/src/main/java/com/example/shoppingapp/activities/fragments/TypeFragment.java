@@ -1,5 +1,6 @@
 package com.example.shoppingapp.activities.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -50,7 +51,7 @@ public class TypeFragment extends Fragment implements IClick {
     FirebaseUser user;
     ImageView imgBackType;
     NavController navController;
-    int menuId;
+    int menuId,back;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -112,10 +113,15 @@ public class TypeFragment extends Fragment implements IClick {
         list=new ArrayList<>();
         productAdapter=new ProductAdapter(list,getContext(),TypeFragment.this);
         menuId=getArguments().getInt("menu_id");
+        back=getArguments().getInt("back");
         imgBackType.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                navController.navigate(R.id.action_typeFragment_to_menuFragment);
+                if(back==300){
+                    navController.navigate(R.id.action_typeFragment_to_menuFragment);
+                }else if(back==100){
+                    navController.navigate(R.id.action_typeFragment_to_homeFragment);
+                }
             }
         });
         if(menuId==7){
@@ -161,7 +167,11 @@ public class TypeFragment extends Fragment implements IClick {
     public void onClick(Product product) {
         Bundle bundle=new Bundle();
         bundle.putString("product_id", product.getId());
-        bundle.putInt("back",menuId);
+        if(back==100){
+            bundle.putInt("back",1000);
+        }else{
+            bundle.putInt("back",menuId);
+        }
         bundle.putInt("menu_id",product.getType());
         navController.navigate(R.id.action_typeFragment_to_detailsFragment,bundle);
     }

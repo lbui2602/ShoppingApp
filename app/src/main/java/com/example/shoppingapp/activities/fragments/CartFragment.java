@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.shoppingapp.R;
 import com.example.shoppingapp.adapters.CartAdapter;
@@ -105,11 +106,16 @@ public class CartFragment extends Fragment implements IClick {
         btnThanhToan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                NavController navController=NavHostFragment.findNavController(CartFragment.this);
-                Bundle bundle=new Bundle();
-                bundle.putInt("sum",sum);
-                bundle.putString("email",email);
-                navController.navigate(R.id.action_cartFragment_to_payFragment,bundle);
+                if(sum>0){
+                    NavController navController=NavHostFragment.findNavController(CartFragment.this);
+                    Bundle bundle=new Bundle();
+                    bundle.putInt("sum",sum);
+                    bundle.putString("email",email);
+                    navController.navigate(R.id.action_cartFragment_to_payFragment,bundle);
+                }else{
+                    Toast.makeText(getContext(), "Giỏ hàng của bạn chưa có gì!", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
     }

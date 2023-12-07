@@ -127,6 +127,7 @@ public class MenuFragment extends Fragment {
     public void navigate(int menuId){
         Bundle bundle=new Bundle();
         bundle.putInt("menu_id",menuId);
+        bundle.putInt("back",300);
         NavController navController = NavHostFragment.findNavController(MenuFragment.this);
         navController.navigate(R.id.action_menuFragment_to_typeFragment,bundle);
     }

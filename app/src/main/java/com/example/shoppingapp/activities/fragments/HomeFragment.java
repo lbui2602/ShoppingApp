@@ -7,14 +7,18 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.fragment.NavHostFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.adapters.HomeProductAdapter;
 import com.example.shoppingapp.models.Product;
 import com.example.shoppingapp.models.User;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,7 +35,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements HomeProductAdapter.Click {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -44,6 +48,11 @@ public class HomeFragment extends Fragment {
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
     SearchView searchView;
+    Button btnAo,btnQuan,btnGiay,btnPhuKien,btnSport,btnDoLot;
+    NavController navController;
+    List<Product> list;
+    HomeProductAdapter adapter;
+    RecyclerView rcv;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -87,10 +96,6 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
-    }
-
-    private void initView(View view) {
-        searchView=view.findViewById(R.id.searchView);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -105,7 +110,102 @@ public class HomeFragment extends Fragment {
                 return false;
             }
         });
+        btnAo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("menu_id",1);
+                bundle.putInt("back",100);
+                navController.navigate(R.id.action_homeFragment_to_typeFragment,bundle);
+            }
+        });
+        btnQuan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("menu_id",2);
+                bundle.putInt("back",100);
+                navController.navigate(R.id.action_homeFragment_to_typeFragment,bundle);
+            }
+        });
+        btnGiay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("menu_id",3);
+                bundle.putInt("back",100);
+                navController.navigate(R.id.action_homeFragment_to_typeFragment,bundle);
+            }
+        });
+        btnPhuKien.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("menu_id",4);
+                bundle.putInt("back",100);
+                navController.navigate(R.id.action_homeFragment_to_typeFragment,bundle);
+            }
+        });
+        btnSport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("menu_id",6);
+                bundle.putInt("back",100);
+                navController.navigate(R.id.action_homeFragment_to_typeFragment,bundle);
+            }
+        });
+        btnDoLot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Bundle bundle=new Bundle();
+                bundle.putInt("menu_id",5);
+                bundle.putInt("back",100);
+                navController.navigate(R.id.action_homeFragment_to_typeFragment,bundle);
+            }
+        });
+    }
+
+    private void initView(View view) {
+        searchView=view.findViewById(R.id.searchView);
+        btnAo=view.findViewById(R.id.btnAo);
+        btnQuan=view.findViewById(R.id.btnQuan);
+        btnGiay=view.findViewById(R.id.btnGiay);
+        btnPhuKien=view.findViewById(R.id.btnPhuKien);
+        btnSport=view.findViewById(R.id.btnSport);
+        btnDoLot=view.findViewById(R.id.btnDoLot);
+        navController=NavHostFragment.findNavController(HomeFragment.this);
+        rcv=view.findViewById(R.id.rcvHome);
+        LinearLayoutManager linearLayoutManager= new LinearLayoutManager(getContext(),LinearLayoutManager.HORIZONTAL,false);
+        rcv.setLayoutManager(linearLayoutManager);
+        list=new ArrayList<>();
+        FirebaseDatabase.getInstance().getReference("products").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    Product product=dataSnapshot.getValue(Product.class);
+                    if(Integer.parseInt(product.getId())%10==0){
+                        list.add(product);
+                    }
+                }
+                adapter=new HomeProductAdapter(list,getContext(),HomeFragment.this);
+                rcv.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
     }
 
 
+    @Override
+    public void onClick(Product product) {
+        Bundle bundle=new Bundle();
+        bundle.putString("product_id", product.getId());
+        bundle.putInt("back",100);
+        bundle.putInt("menu_id",product.getType());
+        navController.navigate(R.id.action_homeFragment_to_detailsFragment,bundle);
+    }
 }

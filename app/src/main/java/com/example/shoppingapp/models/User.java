@@ -10,6 +10,16 @@ public class User {
     private String password;
     private List<Cart> listCart;
     private List<Integer> listFavorite;
+    private List<Order> orders;
+
+    public User(String id, String email, String password, List<Cart> listCart, List<Integer> listFavorite, List<Order> orders) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.listCart = listCart;
+        this.listFavorite = listFavorite;
+        this.orders = orders;
+    }
 
     public User(String email, String password, List<Cart> listCart, List<Integer> listFavorite) {
         this.email = email;

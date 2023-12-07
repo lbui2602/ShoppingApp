@@ -11,7 +11,13 @@
         android:layout_width="match_parent"
         android:weightSum="10"
         android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/imgBackSearch"
+            android:src="@drawable/back_icon"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"/>
         <SearchView
+            android:id="@+id/search_view"
             android:layout_weight="1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

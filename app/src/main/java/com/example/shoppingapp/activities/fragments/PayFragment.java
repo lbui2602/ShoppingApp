@@ -17,8 +17,21 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.shoppingapp.R;
+import com.example.shoppingapp.models.Cart;
+import com.example.shoppingapp.models.DonHang;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -40,6 +53,7 @@ public class PayFragment extends Fragment {
     RadioButton radioNhanHang,radioCK;
     Button btnConfirmPay;
     ImageView imgBack;
+    static List<Cart> list;
 
     public PayFragment() {
         // Required empty public constructor
@@ -83,6 +97,55 @@ public class PayFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+        btnConfirmPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String tp=edtTP.getText().toString().trim();
+                String huyen=edtHuyen.getText().toString().trim();
+                String xa=edtXa.getText().toString().trim();
+                String soNha=edtSoNha.getText().toString().trim();
+
+                if(tp.length()>0 && huyen.length()>0 && xa.length()>0 && soNha.length()>0 && (radioCK.isChecked() || radioNhanHang.isChecked())){
+                    String address = soNha+", "+xa+", "+huyen+ ", "+tp;
+                    Calendar calendar = Calendar.getInstance();
+                    int year = calendar.get(Calendar.YEAR);
+                    int month = calendar.get(Calendar.MONTH) + 1;
+                    int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    String ptThanhToan="";
+                    if(radioNhanHang.isChecked()){
+                        ptThanhToan+="Thanh toán khi nhận hàng";
+                    }
+                    if(radioCK.isChecked()){
+                        ptThanhToan+="Chuyển khoản";
+                    }
+                    FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+                    String finalPtThanhToan = ptThanhToan;
+                    list=new ArrayList<>();
+                    FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            for (DataSnapshot dataSnapshot : snapshot.child("carts").getChildren()) {
+                                Cart cart = dataSnapshot.getValue(Cart.class);
+                                list.add(cart);
+                            }
+                            DonHang donHang = new DonHang(user.getUid() + day + month + year, list, address, finalPtThanhToan, day + "-" + month + "-" + year);
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("orders").child(user.getUid() + day + month + year).setValue(donHang);
+                            NavController navController = NavHostFragment.findNavController(PayFragment.this);
+                            navController.navigate(R.id.action_payFragment_to_confirmPay);
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("carts").removeValue();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }else{
+                    Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
     }
 
     private void initView(View view) {
