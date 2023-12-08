@@ -29,8 +29,10 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -53,6 +55,7 @@ public class PayFragment extends Fragment {
     RadioButton radioNhanHang,radioCK;
     Button btnConfirmPay;
     ImageView imgBack;
+    int sum;
     static List<Cart> list;
 
     public PayFragment() {
@@ -111,6 +114,9 @@ public class PayFragment extends Fragment {
                     int year = calendar.get(Calendar.YEAR);
                     int month = calendar.get(Calendar.MONTH) + 1;
                     int day = calendar.get(Calendar.DAY_OF_MONTH);
+                    SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+                    Date currentTime = calendar.getTime();
+                    String time = timeFormat.format(currentTime);
                     String ptThanhToan="";
                     if(radioNhanHang.isChecked()){
                         ptThanhToan+="Thanh toán khi nhận hàng";
@@ -128,10 +134,10 @@ public class PayFragment extends Fragment {
                                 Cart cart = dataSnapshot.getValue(Cart.class);
                                 list.add(cart);
                             }
-                            DonHang donHang = new DonHang(user.getUid() + day + month + year, list, address, finalPtThanhToan, day + "-" + month + "-" + year);
-                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("orders").child(user.getUid() + day + month + year).setValue(donHang);
+                            DonHang donHang = new DonHang(user.getUid() + day + month + year+ time , list, address, finalPtThanhToan, day + "-" + month + "-" + year,time,sum);
+                            FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("orders").child(user.getUid() + day + month + year+time).setValue(donHang);
                             NavController navController = NavHostFragment.findNavController(PayFragment.this);
-                            navController.navigate(R.id.action_payFragment_to_confirmPay);
+                            navController.navigate(R.id.action_payFragment_to_cartFragment);
                             FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("carts").removeValue();
                         }
 
@@ -140,6 +146,7 @@ public class PayFragment extends Fragment {
 
                         }
                     });
+                    Toast.makeText(getContext(), "Đặt hàng thành công.", Toast.LENGTH_SHORT).show();
 
                 }else{
                     Toast.makeText(getContext(), "Vui lòng nhập đủ thông tin!", Toast.LENGTH_SHORT).show();
@@ -161,7 +168,7 @@ public class PayFragment extends Fragment {
         radioNhanHang=view.findViewById(R.id.radioNhanHang);
         radioCK=view.findViewById(R.id.radioChuyenKhoan);
         btnConfirmPay=view.findViewById(R.id.btnConfirmPay);
-        int sum=getArguments().getInt("sum");
+        sum=getArguments().getInt("sum");
 
         tvEmailPay.setText(getArguments().getString("email"));
         tvGiaTriPay.setText("đ"+sum+".000");

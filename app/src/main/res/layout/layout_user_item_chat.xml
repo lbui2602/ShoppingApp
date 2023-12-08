@@ -7,16 +7,11 @@
     android:layout_margin="@dimen/_5sdp"
     android:background="@color/white"
     android:layout_height="@dimen/_35sdp">
-    <androidx.cardview.widget.CardView
+    <ImageView
+        android:id="@+id/imgUserChat"
+        android:src="@color/black"
         android:layout_width="@dimen/_35sdp"
-        app:cardCornerRadius="50dp"
-        android:layout_height="match_parent">
-        <ImageView
-            android:id="@+id/imgUserChat"
-            android:src="@color/black"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </androidx.cardview.widget.CardView>
+        android:layout_height="match_parent"/>
     <TextView
         android:text="buiduclkuong@mgisal.cvihv"
         android:gravity="center_vertical"

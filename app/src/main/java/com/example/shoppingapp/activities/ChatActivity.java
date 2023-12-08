@@ -99,16 +99,25 @@ public class ChatActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 list.clear();
+                int index=0;
                 for(DataSnapshot dataSnapshot : snapshot.getChildren()){
                     Chat chat=dataSnapshot.getValue(Chat.class);
                     if(chat.getReceiver().equals(myId) && chat.getSender().equals(userId) ||
                             chat.getReceiver().equals(userId) && chat.getSender().equals(myId)){
                         list.add(chat);
+                        index=1;
                     }
                 }
-                chatAdapter=new ChatAdapter(list,ChatActivity.this,"default");
-                Log.d("TAG", "onDataChange: "+list.size());
-                rcv.setAdapter(chatAdapter);
+                if(index==0){
+                    list=new ArrayList<>();
+                    chatAdapter=new ChatAdapter(list,ChatActivity.this,"default");
+                }
+                else{
+                    chatAdapter=new ChatAdapter(list,ChatActivity.this,"default");
+                    Log.d("TAG", "onDataChange: "+list.size());
+                    rcv.setAdapter(chatAdapter);
+                    rcv.smoothScrollToPosition(list.size()-1);
+                }
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

@@ -44,7 +44,7 @@ public class UserChatAdapter extends RecyclerView.Adapter<UserChatAdapter.UserCh
     public void onBindViewHolder(@NonNull UserChatViewHolder holder, int position) {
         User user=list.get(position);
         holder.tvUserNameChat.setText(user.getEmail());
-        holder.imgUserChat.setImageResource(R.drawable.ic_launcher_background);
+        holder.imgUserChat.setImageResource(R.drawable.user);
         holder.llUserChat.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

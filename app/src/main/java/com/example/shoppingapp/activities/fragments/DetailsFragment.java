@@ -204,6 +204,10 @@ public class DetailsFragment extends Fragment {
                 else if(back==1000) {
                     bundle.putInt("back",100);
                     navController.navigate(R.id.action_detailsFragment_to_typeFragment,bundle);
+                }else if(back==7){
+                    bundle.putInt("back",300);
+                    bundle.putInt("menu_id",7);
+                    navController.navigate(R.id.action_detailsFragment_to_typeFragment,bundle);
                 }else{
                     bundle.putInt("back",300);
                     navController.navigate(R.id.action_detailsFragment_to_typeFragment,bundle);

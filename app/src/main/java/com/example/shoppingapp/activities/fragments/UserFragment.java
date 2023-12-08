@@ -41,6 +41,8 @@ public class UserFragment extends Fragment {
     private String mParam1;
     private String mParam2;
     LinearLayout llTinNhan;
+    LinearLayout llDoiMK;
+    LinearLayout llDonHang;
     onClickLogout onClickLogout;
     TextView tvNameUser;
 
@@ -87,6 +89,8 @@ public class UserFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         btnLogout=view.findViewById(R.id.btnLogout);
         llTinNhan=view.findViewById(R.id.llTinNhan);
+        llDoiMK=view.findViewById(R.id.llDoiMK);
+        llDonHang=view.findViewById(R.id.llDonHang);
         tvNameUser=view.findViewById(R.id.tvNameUser);
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
         NavController navController = NavHostFragment.findNavController(UserFragment.this);
@@ -104,6 +108,18 @@ public class UserFragment extends Fragment {
                     Log.d("TAG", " admin: ");
                     navController.navigate(R.id.action_userFragment_to_userChatFragment);
                 }
+            }
+        });
+        llDonHang.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_userFragment_to_historyFragment);
+            }
+        });
+        llDoiMK.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_userFragment_to_doiMKFragment);
             }
         });
         btnLogout.setOnClickListener(new View.OnClickListener() {

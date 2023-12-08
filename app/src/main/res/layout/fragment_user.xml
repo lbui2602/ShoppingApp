@@ -7,87 +7,123 @@
 
     <!-- TODO: Update blank fragment layout -->
     <LinearLayout
-        android:weightSum="8"
-        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:weightSum="8">
+
         <TextView
             android:id="@+id/tvNameUser"
-            android:text="Hello luong bui"
-            android:textStyle="bold"
-            android:textColor="@color/black"
-            android:layout_margin="@dimen/_10sdp"
-            android:textSize="@dimen/_20sdp"
             android:layout_width="match_parent"
             android:layout_height="0dp"
+            android:layout_margin="@dimen/_10sdp"
+            android:layout_weight="0.7"
             android:gravity="center_vertical"
-            android:layout_weight="0.7"/>
+            android:text="Hello luong bui"
+            android:textColor="@color/black"
+            android:textSize="@dimen/_20sdp"
+            android:textStyle="bold" />
+
         <LinearLayout
             android:id="@+id/llTinNhan"
-            android:layout_marginTop="@dimen/_40sdp"
-            android:background="#E1DDDD"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:weightSum="10"
-            android:layout_weight="1">
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_weight="1"
+            android:background="#E1DDDD"
+            android:orientation="horizontal"
+            android:weightSum="10">
+
+            <ImageView
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/messager_icon" />
+
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9.5"
+                android:gravity="center_vertical"
                 android:text="Tin nhắn"
                 android:textColor="@color/black"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
                 android:textSize="@dimen/_15sdp"
-                android:layout_weight="7"
-                android:layout_width="0dp"
+                android:textStyle="bold" />
+            <ImageView
+                android:src="@drawable/muiten_icon"
+                android:layout_width="@dimen/_30sdp"
                 android:layout_height="match_parent"/>
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/llDonHang"
-            android:orientation="horizontal"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:weightSum="10"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <ImageView
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/order_icon" />
+
             <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9.5"
+                android:gravity="center_vertical"
                 android:text="Đơn hàng của tôi"
                 android:textColor="@color/black"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
                 android:textSize="@dimen/_15sdp"
-                android:layout_weight="7"
-                android:layout_width="0dp"
+                android:textStyle="bold" />
+            <ImageView
+                android:src="@drawable/muiten_icon"
+                android:layout_width="@dimen/_30sdp"
                 android:layout_height="match_parent"/>
         </LinearLayout>
+
         <LinearLayout
-            android:id="@+id/llThongTinTK"
-            android:background="#E1DDDD"
-            android:orientation="horizontal"
+            android:id="@+id/llDoiMK"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:weightSum="10"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="#E1DDDD"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <ImageView
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/setting_icon" />
+
             <TextView
-                android:text="Thông tin tài khoản."
-                android:textColor="@color/black"
-                android:gravity="center_vertical"
-                android:textStyle="bold"
-                android:textSize="@dimen/_15sdp"
-                android:layout_weight="7"
                 android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9.5"
+                android:gravity="center_vertical"
+                android:text="Đổi mật khẩu"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+            <ImageView
+                android:src="@drawable/muiten_icon"
+                android:layout_width="@dimen/_30sdp"
                 android:layout_height="match_parent"/>
         </LinearLayout>
+
         <Button
-            android:text="Log out"
             android:id="@+id/btnLogout"
-            android:textSize="@dimen/_15sdp"
-            android:textStyle="bold"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:textColor="@color/white"
-            android:background="@color/black"
-            android:layout_marginLeft="@dimen/_10sdp"
-            android:layout_marginRight="@dimen/_10sdp"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/_30sdp"/>
+            android:layout_height="@dimen/_30sdp"
+            android:layout_marginLeft="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginRight="@dimen/_10sdp"
+            android:background="@color/black"
+            android:text="Log out"
+            android:textColor="@color/white"
+            android:textSize="@dimen/_15sdp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 </FrameLayout>
