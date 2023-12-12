@@ -71,6 +71,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"/>
     <EditText
+        android:inputType="textPassword"
         android:id="@+id/edtPassword"
         android:layout_marginRight="@dimen/_20sdp"
         android:layout_marginLeft="@dimen/_20sdp"

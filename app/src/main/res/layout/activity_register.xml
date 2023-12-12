@@ -74,6 +74,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/edtPassword2"
+                android:inputType="textPassword"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
@@ -99,6 +100,7 @@
                 android:layout_height="wrap_content"/>
             <EditText
                 android:id="@+id/edtPasswordConfirm"
+                android:inputType="textPassword"
                 android:layout_marginRight="@dimen/_20sdp"
                 android:layout_marginLeft="@dimen/_20sdp"
                 android:layout_marginTop="@dimen/_10sdp"
