@@ -111,6 +111,62 @@
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="match_parent"/>
         </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llDoanhSo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <ImageView
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/doanhthu" />
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9.5"
+                android:gravity="center_vertical"
+                android:text="Doanh thu"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+            <ImageView
+                android:src="@drawable/muiten_icon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
+        <LinearLayout
+            android:visibility="gone"
+            android:id="@+id/llSpbc"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#E1DDDD"
+            android:orientation="horizontal"
+            android:weightSum="10">
+            <ImageView
+                android:layout_margin="@dimen/_10sdp"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"
+                android:src="@drawable/spbc" />
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="9.5"
+                android:gravity="center_vertical"
+                android:text="Quản lý sản phẩm"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_15sdp"
+                android:textStyle="bold" />
+            <ImageView
+                android:src="@drawable/muiten_icon"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="match_parent"/>
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnLogout"

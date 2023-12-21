@@ -42,6 +42,8 @@ public class UserFragment extends Fragment {
     private String mParam2;
     LinearLayout llTinNhan;
     LinearLayout llDoiMK;
+    LinearLayout llDoanhSo;
+    LinearLayout llSpbc;
     LinearLayout llDonHang;
     onClickLogout onClickLogout;
     TextView tvNameUser;
@@ -90,9 +92,15 @@ public class UserFragment extends Fragment {
         btnLogout=view.findViewById(R.id.btnLogout);
         llTinNhan=view.findViewById(R.id.llTinNhan);
         llDoiMK=view.findViewById(R.id.llDoiMK);
+        llDoanhSo=view.findViewById(R.id.llDoanhSo);
+        llSpbc=view.findViewById(R.id.llSpbc);
         llDonHang=view.findViewById(R.id.llDonHang);
         tvNameUser=view.findViewById(R.id.tvNameUser);
         FirebaseUser user=FirebaseAuth.getInstance().getCurrentUser();
+        if(user.getUid().equals("MKseU4i70aejc3jUY6x9rbCIylp1")){
+            llSpbc.setVisibility(View.VISIBLE);
+            llDoanhSo.setVisibility(View.VISIBLE);
+        }
         NavController navController = NavHostFragment.findNavController(UserFragment.this);
         tvNameUser.setText("Hello "+user.getEmail());
         llTinNhan.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +139,18 @@ public class UserFragment extends Fragment {
                 if(onClickLogout!=null){
                     onClickLogout.onLogout();
                 }
+            }
+        });
+        llDoanhSo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_userFragment_to_doanhThuFragment);
+            }
+        });
+        llSpbc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                navController.navigate(R.id.action_userFragment_to_thongKeFragment);
             }
         });
     }

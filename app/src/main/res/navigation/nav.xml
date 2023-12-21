@@ -58,6 +58,12 @@
         <action
             android:id="@+id/action_userFragment_to_historyFragment"
             app:destination="@id/historyFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_doanhThuFragment"
+            app:destination="@id/doanhThuFragment" />
+        <action
+            android:id="@+id/action_userFragment_to_thongKeFragment"
+            app:destination="@id/thongKeFragment" />
     </fragment>
     <fragment
         android:id="@+id/menuFragment"
@@ -175,4 +181,14 @@
             android:id="@+id/action_historyFragment_to_userFragment"
             app:destination="@id/userFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/doanhThuFragment"
+        android:name="com.example.shoppingapp.activities.fragments.DoanhThuFragment"
+        android:label="fragment_doanh_thu"
+        tools:layout="@layout/fragment_doanh_thu" />
+    <fragment
+        android:id="@+id/thongKeFragment"
+        android:name="com.example.shoppingapp.activities.fragments.ThongKeFragment"
+        android:label="fragment_thong_ke"
+        tools:layout="@layout/fragment_thong_ke" />
 </navigation>

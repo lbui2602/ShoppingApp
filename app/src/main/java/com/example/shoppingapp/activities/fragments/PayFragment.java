@@ -9,6 +9,7 @@ import androidx.navigation.NavController;
 import androidx.navigation.NavHostController;
 import androidx.navigation.fragment.NavHostFragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,6 +34,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -133,9 +135,64 @@ public class PayFragment extends Fragment {
                             for (DataSnapshot dataSnapshot : snapshot.child("carts").getChildren()) {
                                 Cart cart = dataSnapshot.getValue(Cart.class);
                                 list.add(cart);
+                                FirebaseDatabase.getInstance().getReference("spbc").child(cart.getProduct().getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                        if(snapshot.exists()){
+                                            int value=snapshot.child("slg").getValue(Integer.class);
+                                            int slg=value+cart.getQuantity();
+                                            snapshot.child("slg").getRef().setValue(slg);
+                                        }else{
+                                            snapshot.child("slg").getRef().setValue(cart.getQuantity());
+                                            snapshot.child("sp").getRef().setValue(cart.getProduct());
+                                        }
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError error) {
+
+                                    }
+                                });
                             }
                             DonHang donHang = new DonHang(user.getUid() + day + month + year+ time , list, address, finalPtThanhToan, day + "-" + month + "-" + year,time,sum);
                             FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("orders").child(user.getUid() + day + month + year+time).setValue(donHang);
+                            FirebaseDatabase.getInstance().getReference("doanhso").child(month+"-"+year+"").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    if(snapshot.exists()){
+                                        int value=snapshot.child("ds").getValue(Integer.class);
+                                        int ds=(Integer) value+donHang.getSum();
+                                        snapshot.child("ds").getRef().setValue(ds);
+                                    }else{
+                                        snapshot.child("ds").getRef().setValue(donHang.getSum());
+                                        snapshot.child("thang").getRef().setValue(month+"-"+year);
+                                    }
+                                }
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+                                }
+                            });
+//                            for(int i=0;i<donHang.getListCart().size();i++){
+////                                FirebaseDatabase.getInstance().getReference("spbc").child(donHang.getListCart().get(i).getProduct().getId()).child(("sp")).setValue(donHang.getListCart().get(i).getProduct());
+//                                int finalI = i;
+//                                FirebaseDatabase.getInstance().getReference("spbc").child(donHang.getListCart().get(i).getProduct().getId()).addListenerForSingleValueEvent(new ValueEventListener() {
+//                                    @Override
+//                                    public void onDataChange(@NonNull DataSnapshot snapshot) {
+//                                        if(snapshot.exists()){
+//                                            int value=snapshot.child("slg").getValue(Integer.class);
+//                                            int slg=value+donHang.getListCart().get(finalI).getQuantity();
+//                                            snapshot.child("slg").getRef().setValue(slg);
+//                                        }else{
+//                                            snapshot.child("slg").getRef().setValue(donHang.getListCart().get(finalI).getQuantity());
+//                                            snapshot.child("ds").getRef().setValue(donHang.getListCart().get(finalI).getProduct());
+//                                        }
+//                                    }
+//
+//                                    @Override
+//                                    public void onCancelled(@NonNull DatabaseError error) {
+//
+//                                    }
+//                                });
+//                            }
                             NavController navController = NavHostFragment.findNavController(PayFragment.this);
                             navController.navigate(R.id.action_payFragment_to_cartFragment);
                             FirebaseDatabase.getInstance().getReference("users").child(user.getUid()).child("carts").removeValue();

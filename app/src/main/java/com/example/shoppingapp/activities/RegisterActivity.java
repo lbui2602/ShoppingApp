@@ -26,7 +26,6 @@ public class RegisterActivity extends AppCompatActivity {
     TextView tvMessEmail2,tvMessPassword2,tvMessPasswordConfirm;
     EditText edtEmail2,edtPassword2,edtPasswordConfirm;
     Button btnRegister2;
-
     ProgressDialog progressDialog;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference myRef;
@@ -48,7 +47,6 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
-
     private void onClickRegister() {
         String email=edtEmail2.getText().toString().trim();
         String password= edtPassword2.getText().toString().trim();
@@ -74,7 +72,6 @@ public class RegisterActivity extends AppCompatActivity {
                     }
                 });
     }
-
     private void initView() {
         tvMessEmail2=findViewById(R.id.tvMessEmail2);
         tvMessPassword2=findViewById(R.id.tvMessPassword2);
