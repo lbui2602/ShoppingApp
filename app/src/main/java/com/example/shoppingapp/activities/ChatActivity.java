@@ -32,7 +32,6 @@ import java.util.List;
 import java.util.Objects;
 
 public class ChatActivity extends AppCompatActivity {
-    ImageView imgBack;
     TextView tvName;
     RecyclerView rcv;
     EditText edtChat;

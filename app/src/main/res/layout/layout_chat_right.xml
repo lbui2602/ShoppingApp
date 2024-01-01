@@ -18,7 +18,7 @@
             android:id="@+id/tvChatLeft"
             android:text="kdjfkisdf"
             android:padding="@dimen/_5sdp"
-            android:textColor="@color/black"
+            android:textColor="@color/sblack"
             android:layout_centerVertical="true"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
